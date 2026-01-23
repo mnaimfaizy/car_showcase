@@ -135,6 +135,7 @@ NEXT_PUBLIC_PEXELS_API_KEY=your_pexels_api_key_here
 ### How to Obtain API Key
 
 **Pexels API Key** (Optional - FREE):
+
 - Register at [Pexels](https://www.pexels.com/api/)
 - Get your free API key instantly
 - The app works with placeholder images without this key
@@ -152,7 +153,7 @@ The application uses **local seed data** instead of external APIs:
 - **Vehicles**: 50+ cars across 20+ manufacturers
 - **Brands**: Toyota, Honda, Ford, Tesla, BMW, Mercedes-Benz, Audi, and more
 - **Filtering**: Client-side filtering by manufacturer, model, year, and fuel type
-- **Benefits**: 
+- **Benefits**:
   - ✅ No API dependencies or rate limits
   - ✅ Fast response times
   - ✅ Complete control over data

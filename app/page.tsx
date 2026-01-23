@@ -6,9 +6,9 @@ import Image from "next/image";
 export default async function Home({ searchParams }: any) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year || 2022,
+    year: searchParams.year ? parseInt(searchParams.year) : 0,
     fuel: searchParams.fuel || "",
-    limit: searchParams.limit || 10,
+    limit: searchParams.limit ? parseInt(searchParams.limit) : 10,
     model: searchParams.model || "",
   });
 

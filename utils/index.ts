@@ -29,26 +29,26 @@ export async function fetchCars(filters: FilterProps) {
   // Filter by manufacturer
   if (manufacturer) {
     filteredCars = filteredCars.filter(
-      (car) => car.make.toLowerCase() === manufacturer.toLowerCase()
+      (car) => car.make.toLowerCase() === manufacturer.toLowerCase(),
     );
   }
 
   // Filter by year
-  if (year) {
+  if (year && year > 0) {
     filteredCars = filteredCars.filter((car) => car.year === year);
   }
 
   // Filter by model
   if (model) {
     filteredCars = filteredCars.filter((car) =>
-      car.model.toLowerCase().includes(model.toLowerCase())
+      car.model.toLowerCase().includes(model.toLowerCase()),
     );
   }
 
   // Filter by fuel type
   if (fuel) {
     filteredCars = filteredCars.filter(
-      (car) => car.fuel_type.toLowerCase() === fuel.toLowerCase()
+      (car) => car.fuel_type.toLowerCase() === fuel.toLowerCase(),
     );
   }
 
