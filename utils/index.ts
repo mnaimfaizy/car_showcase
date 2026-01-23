@@ -28,7 +28,7 @@ export async function fetchCars(filters: FilterProps) {
     `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
     {
       headers: headers,
-    }
+    },
   );
 
   const result = await response.json();
@@ -36,23 +36,74 @@ export async function fetchCars(filters: FilterProps) {
   return result;
 }
 
+// Generate car image URL using a placeholder service
+// Since Imagin Studio now requires payment, we're using placeholder images
+// Alternative: Integrate with Pexels API for dynamic car photos
 export const generateCarImageUrl = (car: CarProps, angle?: string) => {
-  const url = new URL("https://cdn.imagin.studio/getimage");
-  const { make, model, year } = car;
+  const { make, model } = car;
 
-  url.searchParams.append(
-    "customer",
-    process.env.NEXT_PUBLIC_IMAGIN_API_KEY || ""
-  );
-  url.searchParams.append("make", make);
-  url.searchParams.append("modelFamily", model.split(" ")[0]);
-  url.searchParams.append("zoomType", "fullscreen");
-  url.searchParams.append("modelYear", `${year}`);
-  // url.searchParams.append('zoomLevel', zoomLevel);
-  url.searchParams.append("angle", `${angle}`);
+  // Generate a consistent placeholder based on the car
+  // You can replace this with actual Pexels API integration
+  // See fetchCarImageFromPexels function below for dynamic implementation
 
-  return `${url}`;
+  const carQuery = `${make}-${model}`.toLowerCase().replace(/\s+/g, "-");
+  const seed = carQuery
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+  // Use a selection of high-quality car images from Pexels as placeholders
+  const placeholderImages = [
+    "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/193999/pexels-photo-193999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/244206/pexels-photo-244206.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/1149137/pexels-photo-1149137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/100650/pexels-photo-100650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/892522/pexels-photo-892522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  ];
+
+  // Select image based on car make/model to ensure consistency
+  const imageIndex = seed % placeholderImages.length;
+
+  return placeholderImages[imageIndex];
 };
+
+// Optional: Function to fetch actual car images from Pexels API (requires API key)
+// Uncomment and use this if you want dynamic car-specific images
+/*
+export async function fetchCarImageFromPexels(car: CarProps) {
+  const apiKey = process.env.NEXT_PUBLIC_PEXELS_API_KEY;
+  
+  if (!apiKey) {
+    return generateCarImageUrl(car); // Fallback to placeholder
+  }
+  
+  const query = `${car.make} ${car.model} ${car.year} car`;
+  
+  try {
+    const response = await fetch(
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1`,
+      {
+        headers: {
+          Authorization: apiKey,
+        },
+      }
+    );
+    
+    const data = await response.json();
+    
+    if (data.photos && data.photos.length > 0) {
+      return data.photos[0].src.large; // or .medium, .small
+    }
+    
+    return generateCarImageUrl(car); // Fallback to placeholder
+  } catch (error) {
+    console.error('Error fetching from Pexels:', error);
+    return generateCarImageUrl(car); // Fallback to placeholder
+  }
+}
+*/
 
 export const updateSearchParams = (type: string, value: string) => {
   const searchParams = new URLSearchParams(window.location.search);
