@@ -1,6 +1,6 @@
-# 🚗 Car Showcase - Next.js 13
+# 🚗 Car Showcase - Next.js 16
 
-A modern, feature-rich car showcase and rental platform built with Next.js 13, TypeScript, and Tailwind CSS. Browse through an extensive catalogue of vehicles with advanced filtering and search capabilities.
+A modern, feature-rich car showcase and rental platform built with Next.js 16, React 19, TypeScript, and Tailwind CSS. Browse through an extensive catalogue of vehicles with advanced filtering and search capabilities.
 
 ## 📋 Table of Contents
 
@@ -24,23 +24,26 @@ Car Showcase is a comprehensive web application that allows users to explore, se
 ## ✨ Features
 
 - **🔍 Advanced Search**: Search cars by manufacturer and model
-- **🎯 Smart Filtering**: Filter by fuel type and production year
+- **🎯 Smart Filtering**: Filter by fuel type and production year (2019-2023)
 - **📱 Responsive Design**: Fully responsive UI built with Tailwind CSS
 - **🖼️ Dynamic Images**: High-quality car placeholder images (Pexels integration ready)
 - **💰 Rental Calculation**: Automatic rental price estimation based on car specifications
 - **📄 Pagination**: Load more cars with "Show More" functionality
-- **⚡ Server-Side Rendering**: Fast page loads with Next.js 13 App Router
-- **🎨 Modern UI**: Clean interface with HeadlessUI components
+- **⚡ Server-Side Rendering**: Fast page loads with Next.js 16 App Router
+- **🎨 Modern UI**: Clean interface with HeadlessUI v2 components
 - **🔄 Real-time Updates**: Dynamic URL parameters for shareable searches
+- **💾 Local Data**: 69 vehicles from 20+ manufacturers, no external API dependencies
+- **🚀 Latest Stack**: React 19, Next.js 16, TypeScript 5.9
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 13](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [HeadlessUI React](https://headlessui.com/)
-- **API**:
-  - [API-Ninjas Cars API](https://api-ninjas.com/api/cars) (Free tier)
+- **Framework**: [Next.js 16.1.4](https://nextjs.org/) (App Router)
+- **Runtime**: [React 19.2.3](https://react.dev/)
+- **Language**: [TypeScript 5.9.3](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 3.4.19](https://tailwindcss.com/)
+- **UI Components**: [HeadlessUI React 2.2.9](https://headlessui.com/)
+- **Images**: [Pexels API](https://www.pexels.com/api/) (Free, optional)
+- **Data**: Local seed data (69 vehicles)
 
 ```
 car_showcase-nextjs-13/
@@ -63,7 +66,7 @@ car_showcase-nextjs-13/
 ├── constants/              # Application constants
 │   └── index.ts           # Manufacturers, years, fuel types, footer links
 ├── data/                   # Seed data
-│   └── cars.ts            # Local car database (50+ vehicles)
+│   └── cars.ts            # Local car database (69 vehicles, 2019-2023)
 ├── types/                  # TypeScript type definitions
 │   └── index.ts           # Interface definitions
 ├── utils/                  # Utility functions
@@ -79,7 +82,7 @@ car_showcase-nextjs-13/
 
 ### Prerequisites
 
-- Node.js 18.x or higher
+- Node.js 18.17.0 or higher (recommended: Node.js 20+)
 - npm, yarn, pnpm, or bun
 
 ### Installation
@@ -150,15 +153,17 @@ NEXT_PUBLIC_PEXELS_API_KEY=your_pexels_api_key_here
 The application uses **local seed data** instead of external APIs:
 
 - **Location**: `data/cars.ts`
-- **Vehicles**: 50+ cars across 20+ manufacturers
-- **Brands**: Toyota, Honda, Ford, Tesla, BMW, Mercedes-Benz, Audi, and more
+- **Vehicles**: 69 cars across 20+ manufacturers
+- **Years**: 2019-2023 model years
+- **Brands**: Toyota, Honda, Ford, Tesla, BMW, Mercedes-Benz, Audi, Chevrolet, and more
 - **Filtering**: Client-side filtering by manufacturer, model, year, and fuel type
 - **Benefits**:
   - ✅ No API dependencies or rate limits
-  - ✅ Fast response times
+  - ✅ Fast response times (client-side filtering)
   - ✅ Complete control over data
   - ✅ Works offline
   - ✅ No API keys required for car data
+  - ✅ Zero vulnerabilities
 
 ### Images
 
@@ -214,7 +219,13 @@ For car-specific images from Pexels:
 
 ### `fetchCars(filters: FilterProps)`
 
-Fetches car data from the API based on filter parameters.
+Filters car data from local seed database based on parameters:
+
+- **manufacturer**: Filter by car make (e.g., "Toyota", "Tesla")
+- **year**: Filter by production year (2019-2023)
+- **model**: Filter by model name
+- **fuel**: Filter by fuel type ("gas", "electricity")
+- **limit**: Maximum number of results to return
 
 ### `calculateCarRent(city_mpg: number, year: number)`
 
@@ -226,7 +237,9 @@ Calculates estimated daily rental price based on:
 
 ### `generateCarImageUrl(car: CarProps, angle?: string)`
 
-Generates Imagin Studio image URLs for cars with specified viewing angles.
+Generates placeholder image URLs from Pexels for cars with different viewing angles.
+
+**Optional Enhancement**: Uncomment `fetchCarImageFromPexels()` function for dynamic car-specific images.
 
 ### `updateSearchParams(type: string, value: string)`
 
@@ -312,9 +325,11 @@ The project includes comprehensive TypeScript interfaces:
 - **`SearchManufacturerProps`**: Manufacturer search props
 - **`OptionsProps`**: Generic option structure
 
-## 🔄 Migration Note: Image API
+## 🔄 Updates & Migration Notes
 
-**Update (2026):** The project has been updated to use **Pexels API** instead of Imagin Studio, as Imagin Studio now requires payment.
+### Image API Migration (2024)
+
+The project has been updated to use **Pexels API** instead of Imagin Studio, as Imagin Studio now requires payment.
 
 **Why Pexels?**
 
@@ -335,6 +350,24 @@ The project includes comprehensive TypeScript interfaces:
 - [Unsplash API](https://unsplash.com/developers) - Another excellent free option
 - [Pixabay API](https://pixabay.com/api/docs/) - Free stock photos
 
+### Latest Stack (January 2026)
+
+**Major Updates:**
+
+- ⬆️ **Next.js 13.5.3 → 16.1.4** - Latest stable version
+- ⬆️ **React 18.2.0 → 19.2.3** - React 19 features
+- ⬆️ **TypeScript 5.2.2 → 5.9.3** - Latest TypeScript
+- ⬆️ **HeadlessUI 1.7.17 → 2.2.9** - v2 with improved APIs
+- ⬆️ **Tailwind CSS 3.3.3 → 3.4.19** - Latest stable (v3)
+- 🔄 **API-Ninjas → Local Data** - 69 cars, zero API dependencies
+
+**Breaking Changes Fixed:**
+
+- ✅ **Next.js 15+ `searchParams` is now async** - Must use `await` or `React.use()`
+- ✅ **Image config** - Migrated from `domains` to `remotePatterns`
+- ✅ **HeadlessUI v2** - Nullable onChange handlers
+- ✅ **React 19** - Updated type definitions
+
 ## 🤝 Contributing
 
 Contributions are welcome! To contribute:
@@ -351,11 +384,12 @@ This project is open source and available under the MIT License.
 
 ## 🙏 Acknowledgments
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [HeadlessUI](https://headlessui.com/)
-- [API-Ninjas](https://api-ninjas.com/)
+- [Next.js Documentation](https://nextjs.org/docs) - React framework
+- [React Documentation](https://react.dev/) - UI library
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [HeadlessUI](https://headlessui.com/) - Unstyled UI components
 - [Pexels](https://www.pexels.com/) - Free stock photos and API
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
 
 ## 📧 Support
 

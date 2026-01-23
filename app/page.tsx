@@ -4,12 +4,15 @@ import { fetchCars } from "@/utils";
 import Image from "next/image";
 
 export default async function Home({ searchParams }: any) {
+  // Await searchParams in Next.js 15+
+  const params = await searchParams;
+
   const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year ? parseInt(searchParams.year) : 0,
-    fuel: searchParams.fuel || "",
-    limit: searchParams.limit ? parseInt(searchParams.limit) : 10,
-    model: searchParams.model || "",
+    manufacturer: params.manufacturer || "",
+    year: params.year ? parseInt(params.year) : 0,
+    fuel: params.fuel || "",
+    limit: params.limit ? parseInt(params.limit) : 10,
+    model: params.model || "",
   });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -36,14 +39,17 @@ export default async function Home({ searchParams }: any) {
         {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
-              {allCars?.map((car) => (
-                <CarCard car={car} />
+              {allCars?.map((car, index) => (
+                <CarCard
+                  key={`${car.make}-${car.model}-${car.year}-${index}`}
+                  car={car}
+                />
               ))}
             </div>
 
             <ShowMore
-              pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > allCars.length}
+              pageNumber={(params.limit || 10) / 10}
+              isNext={(params.limit || 10) > allCars.length}
             />
           </section>
         ) : (
