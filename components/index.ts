@@ -9,6 +9,7 @@ import CarCard from "./CarCard";
 import CarDetails from "./CarDetails";
 import ShowMore from "./ShowMore";
 import JsonLd from "./JsonLd";
+import AuthModal from "./AuthModal";
 
 export {
   Hero,
@@ -22,4 +23,5 @@ export {
   CarDetails,
   ShowMore,
   JsonLd,
+  AuthModal,
 };
