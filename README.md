@@ -40,8 +40,7 @@ Car Showcase is a comprehensive web application that allows users to explore, se
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [HeadlessUI React](https://headlessui.com/)
 - **API**:
-  - [Cars by API-Ninjas](https://rapidapi.com/apininjas/api/cars-by-api-ninjas) via RapidAPI
-  - [Pexels API](https://www.pexels.com/api/) for car images (Free!)
+  - [API-Ninjas Cars API](https://api-ninjas.com/api/cars) (Free tier)
 
 ```
 car_showcase-nextjs-13/
@@ -63,6 +62,8 @@ car_showcase-nextjs-13/
 │   └── index.ts            # Component exports
 ├── constants/              # Application constants
 │   └── index.ts           # Manufacturers, years, fuel types, footer links
+├── data/                   # Seed data
+│   └── cars.ts            # Local car database (50+ vehicles)
 ├── types/                  # TypeScript type definitions
 │   └── index.ts           # Interface definitions
 ├── utils/                  # Utility functions
@@ -124,43 +125,39 @@ The page will auto-update as you edit files.
 
 ## 🔐 Environment Variables
 
-Create a `.env.local` file in the root directory with the following variables:
+Create a `.env.local` file in the root directory:
 
 ```env
-# RapidAPI Configuration (Cars by API-Ninjas)
-NEXT_PUBLIC_RAPID_API_KEY=your_rapidapi_key_here
-NEXT_PUBLIC_RAPID_API_HOST=https://api.api-ninjas.com/
-
 # Pexels API (Optional - for dynamic car images)
 NEXT_PUBLIC_PEXELS_API_KEY=your_pexels_api_key_here
 ```
 
-### How to Obtain API Keys
+### How to Obtain API Key
 
-1. **RapidAPI Key**:
-   - Sign up at [RapidAPI](https://rapidapi.com/)
-   - Subscribe to [Cars by API-Ninjas](https://rapidapi.com/apininjas/api/cars-by-api-ninjas)
-   - Copy your API key from the dashboard
+**Pexels API Key** (Optional - FREE):
+- Register at [Pexels](https://www.pexels.com/api/)
+- Get your free API key instantly
+- The app works with placeholder images without this key
+- Add the key to enable dynamic car-specific image searches
 
-2. **Pexels API Key** (Optional - FREE):
-   - Register at [Pexels](https://www.pexels.com/api/)
-   - Get your free API key instantly
-   - The app works with placeholder images without this key
-   - Add the key to enable dynamic car-specific image searches
+**Note**: The car data is now stored locally, so no external API key is required for vehicle data!
 
-## 🔌 API Integration
+## 🔌 Data & API Integration
 
-### Cars API
+### Car Data
 
-The application uses the Cars by API-Ninjas API to fetch vehicle data:
+The application uses **local seed data** instead of external APIs:
 
-- **Endpoint**: `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars`
-- **Parameters**:
-  - `make`: Car manufacturer
-  - `model`: Car model
-  - `year`: Production year
-  - `fuel_type`: Type of fuel
-  - `limit`: Number of results
+- **Location**: `data/cars.ts`
+- **Vehicles**: 50+ cars across 20+ manufacturers
+- **Brands**: Toyota, Honda, Ford, Tesla, BMW, Mercedes-Benz, Audi, and more
+- **Filtering**: Client-side filtering by manufacturer, model, year, and fuel type
+- **Benefits**: 
+  - ✅ No API dependencies or rate limits
+  - ✅ Fast response times
+  - ✅ Complete control over data
+  - ✅ Works offline
+  - ✅ No API keys required for car data
 
 ### Images
 

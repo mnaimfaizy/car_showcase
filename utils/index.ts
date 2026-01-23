@@ -1,5 +1,6 @@
 import { manufacturers } from "./../constants/index";
 import { CarProps, FilterProps } from "@/types";
+import { carsData } from "@/data/cars";
 
 export const calculateCarRent = (city_mpg: number, year: number) => {
   const basePricePerDay = 50; // Base rental price per day in dollars
@@ -19,21 +20,42 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
 
-  const headers = {
-    "X-RapidAPI-Key": `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
-    "X-RapidAPI-Host": `${process.env.NEXT_PUBLIC_RAPID_API_HOST}`,
-  };
+  // Simulate async operation to maintain API-like behavior
+  await new Promise((resolve) => setTimeout(resolve, 100));
 
-  const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
-    {
-      headers: headers,
-    },
-  );
+  // Filter the local seed data based on provided filters
+  let filteredCars = carsData;
 
-  const result = await response.json();
+  // Filter by manufacturer
+  if (manufacturer) {
+    filteredCars = filteredCars.filter(
+      (car) => car.make.toLowerCase() === manufacturer.toLowerCase()
+    );
+  }
 
-  return result;
+  // Filter by year
+  if (year) {
+    filteredCars = filteredCars.filter((car) => car.year === year);
+  }
+
+  // Filter by model
+  if (model) {
+    filteredCars = filteredCars.filter((car) =>
+      car.model.toLowerCase().includes(model.toLowerCase())
+    );
+  }
+
+  // Filter by fuel type
+  if (fuel) {
+    filteredCars = filteredCars.filter(
+      (car) => car.fuel_type.toLowerCase() === fuel.toLowerCase()
+    );
+  }
+
+  // Apply limit
+  const limitedResults = limit ? filteredCars.slice(0, limit) : filteredCars;
+
+  return limitedResults;
 }
 
 // Generate car image URL using a placeholder service
