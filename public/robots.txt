@@ -1,0 +1,6 @@
+# *
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://car-showcase-sepia-sigma.vercel.app/sitemap.xml

@@ -1,0 +1,21 @@
+{
+  "name": "Car Showcase - Premium Car Rental",
+  "short_name": "Car Showcase",
+  "description": "Browse and discover premium cars for rent from top manufacturers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2B59FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["automotive", "lifestyle", "business"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
