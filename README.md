@@ -5,6 +5,7 @@ A modern, feature-rich car showcase and rental platform built with Next.js 16, R
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -20,6 +21,28 @@ A modern, feature-rich car showcase and rental platform built with Next.js 16, R
 ## 🌟 Overview
 
 Car Showcase is a comprehensive web application that allows users to explore, search, and filter through a diverse collection of cars. The application provides detailed information about each vehicle, including specifications, estimated rental costs, and high-quality images from multiple angles.
+
+## 📸 Screenshots
+
+### Homepage
+
+![Homepage](screenshots/homepage.png)
+_Hero section with car catalogue display showcasing the main landing page_
+
+### Car Catalogue
+
+![Car Catalogue](screenshots/car-catalogue.png)
+_Browse through an extensive collection of vehicles with detailed specifications_
+
+### Search Functionality
+
+![Search Dropdown](screenshots/search-dropdown.png)
+_Intelligent manufacturer search with autocomplete feature_
+
+### Filter Options
+
+![Filter Dropdown](screenshots/filter-dropdown.png)
+_Advanced filtering by fuel type and production year_
 
 ## ✨ Features
 
